@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path'
+import ejsLayouts from 'express-ejs-layouts'
 
 import ProductController from './src/controller/product.controller.js';
 const productController = new ProductController();
@@ -10,6 +11,9 @@ const port = 5000;
 // Setup viewEngine settings
 server.set('view engine','ejs')
 server.set('views',path.join(path.resolve(),'src',"views"))
+
+//ejs-layout settings
+server.use(ejsLayouts)
 
 server.get('/',productController.getProducts)
 
