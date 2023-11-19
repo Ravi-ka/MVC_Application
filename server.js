@@ -3,7 +3,7 @@ import path from 'path'
 import ejsLayouts from 'express-ejs-layouts'
 
 import ProductController from './src/controller/product.controller.js';
-import { validateRequest } from './src/middlewares/validation.middleware.js';
+import addProductDataValidation from './src/middlewares/validation.middleware.js';
 
 const server = express();
 const port = 5000;
@@ -20,7 +20,7 @@ server.use(ejsLayouts)
 const productController = new ProductController();
 server.get('/',productController.getProducts)
 server.get('/new',productController.getAddForm)
-server.post('/',validateRequest,productController.addNewProduct)
+server.post('/',addProductDataValidation,productController.addNewProduct)
 
 // server.use(express.static('src/views'))
 
