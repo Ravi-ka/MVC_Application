@@ -8,6 +8,8 @@ import addProductDataValidation from './src/middlewares/validation.middleware.js
 const server = express();
 const port = 5000;
 
+server.use(express.static('public'))
+
 server.use(express.urlencoded({extended:true}))
 
 // Setup viewEngine settings
@@ -23,6 +25,7 @@ server.get('/new',productController.getAddForm)
 server.post('/',addProductDataValidation,productController.addNewProduct)
 server.get('/update/:id',productController.getUpdateProductView)
 server.post('/update',productController.postUpdateProduct)
+server.post('/delete/:id',productController.deleteProduct)
 
 // server.use(express.static('src/views'))
 
