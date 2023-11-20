@@ -1,7 +1,7 @@
 function deleteFunction(id){
     const result = confirm('Are you sure you want to delete the product?')
     if(result){
-        fetch('/delete/'+id,{
+        fetch(`delete/${id}`,{
             method:'POST'
         })
         .then((res)=>{
