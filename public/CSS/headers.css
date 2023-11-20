@@ -6,4 +6,6 @@
 /* 
 1. Link the css file to the main HTML view (layouts.ejs)
 2. Double check the path while linking the css file.
+
+The parent folder(Public) is statically added in the server.js file.
 */
