@@ -4,6 +4,7 @@ import ejsLayouts from 'express-ejs-layouts'
 
 import ProductController from './src/controller/product.controller.js';
 import addProductDataValidation from './src/middlewares/validation.middleware.js';
+import { uploadFile } from './src/middlewares/file-upload.middleware.js';
 
 const server = express();
 const port = 5000;
@@ -22,7 +23,7 @@ server.use(ejsLayouts)
 const productController = new ProductController();
 server.get('/',productController.getProducts)
 server.get('/new',productController.getAddForm)
-server.post('/',addProductDataValidation,productController.addNewProduct)
+server.post('/',uploadFile.single('imageUrl'),addProductDataValidation,productController.addNewProduct)
 server.get('/update/:id',productController.getUpdateProductView)
 server.post('/update',productController.postUpdateProduct)
 server.post('/delete/:id',productController.deleteProduct)
