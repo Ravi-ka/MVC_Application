@@ -41,5 +41,8 @@ export default class UserController{
                 res.redirect('/login')
             }
         })
+        // ? Deleting the 'lastVisit' cookie while logout
+        res.clearCookie('lastVisit')
+
     }
 }

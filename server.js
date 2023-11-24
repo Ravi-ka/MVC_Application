@@ -19,7 +19,7 @@ server.use(express.static('public'))
 
 // Initializing the cookie-parser
 server.use(cookieParser())
-server.use(setLastVisit)
+//server.use(setLastVisit)
 
 // Initializing the cookie
 server.use(session({
@@ -48,7 +48,7 @@ server.post('/register',userController.postRegister)
 server.get('/login',userController.getLogin)
 server.post('/login',userController.postLogin)
 server.get('/logout',userController.userLogout)
-server.get('/',authentication,productController.getProducts)
+server.get('/',setLastVisit,authentication,productController.getProducts)
 server.get('/new',authentication,productController.getAddForm)
 server.post('/',authentication,uploadFile.single('imageUrl'),addProductDataValidation,productController.addNewProduct)
 server.get('/update/:id',authentication,productController.getUpdateProductView)
