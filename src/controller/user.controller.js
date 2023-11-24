@@ -25,6 +25,8 @@ export default class UserController{
         if(!user){
             return res.render('login',{errorMessage: 'Invalid Credentials'})
         }
+        req.session.userEmail = email;
+        console.log(req.session)
         let products = ProductModel.get();
          res.render('products',{products})
     }
