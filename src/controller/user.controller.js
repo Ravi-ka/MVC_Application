@@ -28,6 +28,18 @@ export default class UserController{
         req.session.userEmail = email;
         console.log(req.session)
         let products = ProductModel.get();
-         res.render('products',{products})
+         res.render('products',{products,userEmail:req.session.userEmail})
+    }
+
+    userLogout(req, res){
+        // ! On logout, destroy the session and redirect to the login page
+        req.session.destroy((err)=>{
+            if(err){
+                console.log(err)
+            }
+            else{
+                res.redirect('/login')
+            }
+        })
     }
 }

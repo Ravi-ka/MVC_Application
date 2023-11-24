@@ -5,7 +5,7 @@ import ProductModel from '../model/product.model.js';
 export default class ProductController{
     getProducts(req, res){
          let products = ProductModel.get();
-         res.render('products',{products})
+         res.render('products',{products,userEmail:req.session.userEmail})
          //console.log(products)
         //  return res.sendFile(path.join(path.resolve(),'src',"views",'products.html'))
     }
@@ -21,7 +21,7 @@ export default class ProductController{
         console.log(req.body)
         ProductModel.add(name, desc, price,imageUrl)
         let products = ProductModel.get();
-        return res.render('products',{products})
+        return res.render('products',{products,userEmail:req.session.userEmail})
     }
 
     getUpdateProductView(req, res, next){
@@ -45,7 +45,7 @@ export default class ProductController{
     postUpdateProduct(req, res) {
         ProductModel.update(req.body);
         var products = ProductModel.get();
-        res.render('products', { products });
+        res.render('products', { products ,userEmail:req.session.userEmail});
       }
 
       deleteProduct(req, res){
@@ -57,6 +57,6 @@ export default class ProductController{
         }
         ProductModel.delete(Id)
         var products = ProductModel.get();
-        res.render('products', { products });
+        res.render('products', { products ,userEmail:req.session.userEmail});
       }
 }
