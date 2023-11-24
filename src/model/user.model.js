@@ -18,5 +18,9 @@ export default class UserModel{
 }
 
 let user =[
-   
+   {
+    name:'test',
+    email:'test@test.com',
+    password:'testuser'
+   }
 ];

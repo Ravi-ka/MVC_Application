@@ -2,18 +2,24 @@ import express from 'express';
 import path from 'path'
 import ejsLayouts from 'express-ejs-layouts'
 import session from 'express-session';
+import cookieParser from 'cookie-parser';
 
 import ProductController from './src/controller/product.controller.js';
 import UserController from './src/controller/user.controller.js';
 import addProductDataValidation from './src/middlewares/validation.middleware.js';
 import { uploadFile } from './src/middlewares/file-upload.middleware.js';
 import authentication from './src/middlewares/auth.middleware.js';
+import {setLastVisit} from './src/middlewares/lastVisit.middleware.js';
 
 const server = express();
 const port = 5000;
 
 // Statically exposing the public folder
 server.use(express.static('public'))
+
+// Initializing the cookie-parser
+server.use(cookieParser())
+server.use(setLastVisit)
 
 // Initializing the cookie
 server.use(session({
@@ -49,9 +55,7 @@ server.get('/update/:id',authentication,productController.getUpdateProductView)
 server.post('/update',authentication,productController.postUpdateProduct)
 server.post('/delete/:id',authentication,productController.deleteProduct)
 
-
 // server.use(express.static('src/views'))
-
 // server.get('/',(req, res)=>{
 //     return res.send('Welcome to MVC Application')
 // })
